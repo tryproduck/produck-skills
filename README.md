@@ -25,7 +25,7 @@ are available the next time your agent starts.
 
 ---
 
-## Skills catalog
+## Skills Catalog
 
 | Skill | What it does |
 | --- | --- |

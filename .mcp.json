@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "produck": {
+      "command": "sh",
+      "args": [
+        "-lc",
+        "TOKEN=\"${PRODUCK_MCP_TOKEN:-}\"; if [ -z \"$TOKEN\" ] && [ -f \"$HOME/.produck/mcp_token\" ]; then TOKEN=\"$(cat \"$HOME/.produck/mcp_token\")\"; fi; if [ -z \"$TOKEN\" ]; then echo 'produck: set PRODUCK_MCP_TOKEN or write your token to ~/.produck/mcp_token (mint one at https://tryproduck.com/app)' >&2; exit 1; fi; exec npx -y mcp-remote https://tryproduck.com/api/mcp --header \"Authorization: Bearer $TOKEN\" --transport http-first"
+      ]
+    }
+  }
+}

@@ -30,8 +30,44 @@ are available the next time your agent starts.
 | Skill | What it does |
 | --- | --- |
 | [`user-alignment`](skills/user-alignment/SKILL.md) | Turn vague or messy user requests into aligned, agent-executable PRDs — with scope, bounded phases, testable acceptance criteria, and explicit do-not-do boundaries. |
+| [`produck-feedback`](skills/produck-feedback/SKILL.md) | Act on real in-context user feedback: pull a feedback ticket's full context through the Produck MCP and drive a feedback → aligned PRD → build loop. Pairs with `user-alignment`. |
 
 More user-experience skills are on the way.
+
+---
+
+## Produck MCP & plugin
+
+The `produck-feedback` skill drives the **Produck MCP** — a hosted server that gives your agent two
+tools over your own feedback:
+
+- **`search_feedback`** — find relevant feedback tickets (filter by domain).
+- **`get_feedback`** — load one ticket's full context: the user's written/spoken feedback,
+  reconstructed page HTML, annotation markers, session activity, and a generated design doc.
+
+You need a token: open [tryproduck.com/app](https://tryproduck.com/app) → **MCP**, generate one
+(`mcp_live_…`), then `export PRODUCK_MCP_TOKEN=mcp_live_…` (or write it to `~/.produck/mcp_token`).
+
+### Claude Code — one-click plugin (skills + MCP)
+
+```
+/plugin marketplace add tryproduck/produck-skills
+/plugin install produck@produck
+```
+
+### Codex — one-click plugin (skills + MCP)
+
+```
+codex plugin marketplace add tryproduck/produck-skills
+# then enable "produck" from the /plugins browser
+```
+
+### Any other agent
+
+Install the skills with `npx skills add tryproduck/produck-skills`, then add the MCP server using your
+agent's native config — see
+[`skills/produck-feedback/references/connect-mcp.md`](skills/produck-feedback/references/connect-mcp.md)
+for Cursor, opencode, manual Codex, and manual Claude Code snippets.
 
 ---
 

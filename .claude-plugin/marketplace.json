@@ -1,0 +1,13 @@
+{
+  "name": "produck",
+  "owner": { "name": "Produck", "email": "yuv@tryproduck.com" },
+  "metadata": { "description": "Produck: in-context user feedback + alignment skills for coding agents." },
+  "plugins": [
+    {
+      "name": "produck",
+      "source": ".",
+      "description": "Produck MCP (search_feedback, get_feedback) + feedback-to-fix and user-alignment skills.",
+      "author": { "name": "Produck", "email": "yuv@tryproduck.com", "url": "https://tryproduck.com" }
+    }
+  ]
+}

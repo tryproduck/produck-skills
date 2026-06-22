@@ -45,21 +45,30 @@ tools over your own feedback:
 - **`get_feedback`** — load one ticket's full context: the user's written/spoken feedback,
   reconstructed page HTML, annotation markers, session activity, and a generated design doc.
 
-You need a token: open [tryproduck.com/app](https://tryproduck.com/app) → **MCP**, generate one
-(`mcp_live_…`), then `export PRODUCK_MCP_TOKEN=mcp_live_…` (or write it to `~/.produck/mcp_token`).
+Both installs need a Produck MCP token — mint one at
+[tryproduck.com/app](https://tryproduck.com/app) → **MCP** (looks like `mcp_live_…`). The plugin reads
+it at runtime; set it **before** the MCP tools will work (the skills work without it).
 
-### Claude Code — one-click plugin (skills + MCP)
+### Claude Code — plugin (skills + MCP)
 
+```bash
+# 1) in your shell: save your token
+mkdir -p ~/.produck && echo "mcp_live_YOUR_TOKEN" > ~/.produck/mcp_token
 ```
+```
+# 2) in Claude Code:
 /plugin marketplace add tryproduck/produck-skills
 /plugin install produck@produck
 ```
 
-### Codex — one-click plugin (skills + MCP)
+### Codex — plugin (skills + MCP)
 
-```
+```bash
+# 1) in your shell: export your token
+export PRODUCK_MCP_TOKEN=mcp_live_YOUR_TOKEN
+
+# 2) add the marketplace, then enable "produck" from the /plugins browser
 codex plugin marketplace add tryproduck/produck-skills
-# then enable "produck" from the /plugins browser
 ```
 
 ### Any other agent

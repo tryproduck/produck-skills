@@ -140,6 +140,24 @@ And [additional observable result]
 
 Avoid vague terms like “fast,” “simple,” “intuitive,” “robust,” or “user-friendly” unless they are backed by measurable thresholds.
 
+### 2.8 Ingest User Session Replays & Droplet Context
+
+When debugging or implementing fixes from user feedback, agents must not rely solely on text descriptions. They should actively parse available session recordings, screenshots, console error logs, and network payloads captured during the user session. 
+
+An agent-executable PRD must instruct the agent on how to:
+- Correlate screenshots to specific UI components and coordinates.
+- Parse stack traces and console errors to identify the exact files and lines of code responsible.
+- Use network request/response payloads to trace API mismatches or data corruptions.
+
+### 2.9 Leverage Persistent Memory & Preferences
+
+To prevent context drift and avoid re-teaching the agent style preferences (e.g. using arrow functions, specific hook patterns) or workspace constraints across different chat sessions, the project must maintain a persistent memory file (e.g. `.agentguard/parcel-memory.json`). 
+
+The PRD should define:
+- How the agent reads this file before every execution step.
+- How the agent updates the history/state log in the memory file after completing a phase.
+- An explicit rule requiring the agent to align all generated code with these persistent preferences.
+
 ---
 
 ## 3. User alignment workflow

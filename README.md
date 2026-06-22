@@ -96,6 +96,7 @@ Produck enables apps to capture in-context feedback from their users and rapidly
 
 - 🌐 Website: [tryproduck.com](https://tryproduck.com)
 - 📚 Docs: [docs.tryproduck.com](https://docs.tryproduck.com)
+- 🛠️ Maintained by the Produck team, including [Xander Minzenmay](https://github.com/LucaXav)
 
 ## License
 

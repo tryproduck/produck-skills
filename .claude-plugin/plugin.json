@@ -1,0 +1,10 @@
+{
+  "name": "produck",
+  "description": "Pull real in-context user feedback into your coding agent and ship aligned fixes. Bundles the produck MCP (search_feedback, get_feedback), a feedback-to-fix guide skill, and the user-alignment PRD skill.",
+  "version": "0.1.0",
+  "author": { "name": "Produck", "email": "yuv@tryproduck.com", "url": "https://tryproduck.com" },
+  "homepage": "https://tryproduck.com",
+  "repository": "https://github.com/tryproduck/produck-skills",
+  "license": "Apache-2.0",
+  "keywords": ["produck", "feedback", "mcp", "user-alignment", "prd", "ux"]
+}

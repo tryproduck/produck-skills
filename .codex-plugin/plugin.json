@@ -1,0 +1,7 @@
+{
+  "name": "produck",
+  "version": "0.1.0",
+  "description": "Produck MCP (search_feedback, get_feedback) + feedback-to-fix and user-alignment skills.",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

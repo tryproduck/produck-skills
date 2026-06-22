@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentGuard — Enter Pro Safety Layer Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0: #0d0f14;
+      --bg-1: #13151c;
+      --bg-2: #1a1d26;
+      --bg-3: #21253100;
+      --border: rgba(255,255,255,0.07);
+      --border-active: rgba(139,92,246,0.5);
+      --violet: #8b5cf6;
+      --violet-dim: rgba(139,92,246,0.15);
+      --green: #22c55e;
+      --green-dim: rgba(34,197,94,0.12);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245,158,11,0.12);
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.12);
+      --blue: #60a5fa;
+      --text-1: #f0f2f8;
+      --text-2: #9ca3af;
+      --text-3: #4b5563;
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-0);
+      color: var(--text-1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP BANNER ─────────────────────────────────────────────── */
+    .banner {
+      background: linear-gradient(90deg, #4c1d95, #7c3aed, #4c1d95);
+      background-size: 200% 100%;
+      animation: shimmer 4s infinite linear;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ddd6fe;
+      letter-spacing: 0.02em;
+    }
+    @keyframes shimmer { 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+    /* ── HEADER ────────────────────────────────────────────────── */
+    header {
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #7c3aed, #3b82f6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .header-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .pill:hover, .pill.active {
+      border-color: var(--violet);
+      color: var(--violet);
+      background: var(--violet-dim);
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ── LAYOUT ────────────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      flex: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      gap: 0;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────────────────── */
+    nav {
+      width: 220px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 10px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+    }
+    .nav-item:hover {
+      background: var(--bg-2);
+      color: var(--text-1);
+    }
+    .nav-item.active {
+      background: var(--violet-dim);
+      color: var(--violet);
+      border-color: var(--border-active);
+    }
+    .nav-item .badge {
+      margin-left: auto;
+      background: var(--violet);
+      color: white;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    /* ── MAIN CONTENT ──────────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding: 28px 32px;
+      min-width: 0;
+    }
+
+    .page-header {
+      margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .page-header p {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    /* ── STATS ROW ─────────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: rgba(139,92,246,0.3); }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-value.green { color: var(--green); }
+    .stat-value.violet { color: var(--violet); }
+    .stat-value.amber { color: var(--amber); }
+    .stat-value.blue { color: var(--blue); }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--text-3);
+      margin-top: 3px;
+    }
+
+    /* ── GRID ──────────────────────────────────────────────────── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(139,92,246,0.25); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title .fp-tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: var(--violet-dim);
+      color: var(--violet);
+      font-weight: 700;
+    }
+
+    /* ── CHECKPOINTS ───────────────────────────────────────────── */
+    .checkpoint-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .checkpoint-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 12.5px;
+      transition: border-color 0.15s;
+    }
+    .checkpoint-item:hover { border-color: var(--border-active); }
+
+    .checkpoint-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .checkpoint-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .checkpoint-dot.violet { background: var(--violet); }
+    .checkpoint-dot.dim { background: var(--text-3); }
+
+    .cp-info { flex: 1; min-width: 0; }
+    .cp-label { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cp-meta { color: var(--text-2); font-size: 11px; }
+
+    .btn-ghost {
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-2);
+      font-size: 11.5px;
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-ghost:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+      background: var(--violet-dim);
+    }
+
+    .btn-primary {
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: white;
+      font-size: 12px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── DRIFT LIST ────────────────────────────────────────────── */
+    .drift-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      font-size: 12.5px;
+    }
+
+    .drift-icon { color: var(--amber); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+    .drift-info { flex: 1; }
+    .drift-file { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+    .drift-note { color: var(--text-2); font-size: 11px; margin-top: 2px; }
+    .drift-badge { color: var(--amber); font-size: 11px; font-weight: 600; white-space: nowrap; }
+
+    /* ── DIFF REVIEW ───────────────────────────────────────────── */
+    .diff-file-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .diff-file {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--bg-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .diff-status {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .diff-status.pending { background: var(--amber); }
+    .diff-status.accepted { background: var(--green); }
+    .diff-status.rejected { background: var(--red); }
+
+    .diff-add { color: var(--green); }
+    .diff-del { color: var(--red); }
+    .diff-actions { display: flex; gap: 6px; margin-left: auto; }
+
+    .btn-accept {
+      padding: 3px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--green);
+      background: var(--green-dim);
+      color: var(--green);
+      font-size: 11px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-reject {
+      padding: 3px 10px;
+      border-radius: 5px;
+      border: 1px solid var(--red);
+      background: var(--red-dim);
+      color: var(--red);
+      font-size: 11px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ── HEALTH GAUGE ──────────────────────────────────────────── */
+    .health-ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    svg.gauge-ring { overflow: visible; }
+
+    .audit-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+    }
+    .audit-row:last-child { border-bottom: none; }
+
+    .audit-icon { font-size: 14px; width: 18px; text-align: center; }
+    .audit-label { flex: 1; font-weight: 500; }
+    .audit-desc { color: var(--text-2); font-size: 11px; }
+    .audit-result { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
+    .audit-result.pass { background: var(--green-dim); color: var(--green); }
+    .audit-result.fail { background: var(--red-dim); color: var(--red); }
+    .audit-result.warn { background: var(--amber-dim); color: var(--amber); }
+
+    /* ── MEMORY RULES ──────────────────────────────────────────── */
+    .rule-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      background: var(--bg-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 7px;
+      font-size: 12.5px;
+    }
+
+    .rule-icon { color: var(--violet); font-size: 14px; }
+    .rule-text { flex: 1; }
+    .rule-remove { color: var(--text-3); cursor: pointer; font-size: 14px; }
+    .rule-remove:hover { color: var(--red); }
+
+    /* ── FP COVERAGE ───────────────────────────────────────────── */
+    .coverage-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .coverage-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      background: var(--bg-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .cov-icon {
+      width: 28px; height: 28px;
+      background: var(--green-dim);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .cov-title { font-weight: 600; font-size: 13px; }
+    .cov-fix { color: var(--text-2); font-size: 11px; }
+    .cov-fp { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--violet); background: var(--violet-dim); padding: 3px 9px; border-radius: 6px; }
+
+    /* ── FULL-WIDTH CARD ───────────────────────────────────────── */
+    .card-full { grid-column: 1 / -1; }
+
+    /* ── CHIP ──────────────────────────────────────────────────── */
+    .chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .chip.green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+    .chip.amber { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber); }
+
+    /* ── MINI TIMELINE ─────────────────────────────────────────── */
+    .mini-tl { position: relative; padding-left: 20px; }
+    .mini-tl::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+
+    .mini-tl-item {
+      position: relative;
+      padding: 6px 0 6px 12px;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .mini-tl-item::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--bg-1);
+      border: 2px solid var(--text-3);
+    }
+
+    .mini-tl-item.current { color: var(--text-1); font-weight: 600; }
+    .mini-tl-item.current::before { border-color: var(--green); background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+    .mini-tl-label { font-weight: 600; }
+    .mini-tl-meta { color: var(--text-3); font-size: 11px; }
+
+    /* ── SYNC PROMPT BOX ───────────────────────────────────────── */
+    .sync-prompt-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-2);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+
+    /* ── FOOTER TOOLBAR ────────────────────────────────────────── */
+    .toolbar {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .toolbar-label { font-size: 12px; color: var(--text-2); }
+
+    /* ── SCROLLBAR ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="banner">
+  🛡️ AgentGuard — Safety Layer for Enter Pro &nbsp;·&nbsp; All 5 guards active &nbsp;·&nbsp; YourJam workspace &nbsp;·&nbsp; <strong>LIVE</strong>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛡️</div>
+    AgentGuard
+  </div>
+  <div class="header-pills">
+    <span class="pill active">Dashboard</span>
+    <span class="pill">Enter Pro Agent</span>
+    <span class="pill">YourJam</span>
+    <div class="status-dot" title="All guards active"></div>
+  </div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav>
+    <div class="nav-label">Safety Modules</div>
+    <div class="nav-item active">
+      <span>🏠</span> Mission Control
+    </div>
+    <div class="nav-item">
+      <span>📸</span> Checkpoints
+      <span class="badge">2</span>
+    </div>
+    <div class="nav-item">
+      <span>⚡</span> Memory Sync
+      <span class="badge">1</span>
+    </div>
+    <div class="nav-item">
+      <span>🔍</span> Diff Review
+      <span class="badge">3</span>
+    </div>
+    <div class="nav-item">
+      <span>❤️</span> Health Check
+    </div>
+    <div class="nav-item">
+      <span>🧠</span> Parcel Memory
+    </div>
+    <div class="nav-label" style="margin-top:12px">Agent</div>
+    <div class="nav-item">
+      <span>🤖</span> Enter Pro
+    </div>
+    <div class="nav-item">
+      <span>📋</span> Activity Log
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="page-header">
+      <h1>Mission Control</h1>
+      <p>Real-time safety telemetry for your Enter Pro coding agent — 5 friction points resolved.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Checkpoints</div>
+        <div class="stat-value violet">2</div>
+        <div class="stat-sub">clean-state · before testing</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Workspace Health</div>
+        <div class="stat-value amber">67%</div>
+        <div class="stat-sub">Monorepo — degraded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending Diffs</div>
+        <div class="stat-value blue">3</div>
+        <div class="stat-sub">files awaiting review</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Stored Rules</div>
+        <div class="stat-value green">4</div>
+        <div class="stat-sub">persistent directives</div>
+      </div>
+    </div>
+
+    <!-- ROW 1 -->
+    <div class="grid-2">
+
+      <!-- FP1 — CHECKPOINTS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            📸 Checkpoints <span class="fp-tag">FP1</span>
+          </div>
+          <button class="btn-primary">+ Save Now</button>
+        </div>
+        <div class="mini-tl">
+          <div class="mini-tl-item current">
+            <div class="mini-tl-label">before testing session</div>
+            <div class="mini-tl-meta">2 commits ago · main · 44 files</div>
+          </div>
+          <div class="mini-tl-item">
+            <div class="mini-tl-label">clean-state</div>
+            <div class="mini-tl-meta">45 mins ago · main · 38 files</div>
+          </div>
+        </div>
+        <div style="margin-top:14px; display:flex; gap:8px;">
+          <button class="btn-ghost">↩ Restore clean-state</button>
+          <button class="btn-ghost">↩ Restore before testing</button>
+        </div>
+      </div>
+
+      <!-- FP2 — MEMORY SYNC -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            ⚡ Memory Sync <span class="fp-tag">FP2</span>
+          </div>
+          <span style="font-size:11px;color:var(--amber);font-weight:600;">1 drifted</span>
+        </div>
+        <div class="drift-item">
+          <div class="drift-icon">⚠️</div>
+          <div class="drift-info">
+            <div class="drift-file">frontend/src/pages/Home.jsx</div>
+            <div class="drift-note">Uncommitted changes: +62 -59 — Agent context stale</div>
+          </div>
+          <div class="drift-badge">~121 lines</div>
+        </div>
+        <div class="sync-prompt-box">⚠️ SYNC NOTICE — Please read before continuing:
+
+I have manually edited the following files since your last action:
+
+--- frontend/src/pages/Home.jsx ---
+```jsx
+// current file content shown here...
+```
+
+Please discard any cached version and use the content above as source of truth.</div>
+        <button class="btn-ghost" style="margin-top:10px;width:100%;justify-content:center;">📋 Copy Sync Prompt</button>
+      </div>
+
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="grid-2">
+
+      <!-- FP3 — DIFF REVIEW -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            🔍 Diff Review <span class="fp-tag">FP3</span>
+          </div>
+          <span style="font-size:11px;color:var(--text-2);">3 pending</span>
+        </div>
+        <ul class="diff-file-list">
+          <li class="diff-file">
+            <span class="diff-status pending"></span>
+            frontend/src/pages/Home.jsx
+            <span class="diff-add" style="margin-left:auto;">+62</span>
+            <span class="diff-del">-59</span>
+            <div class="diff-actions">
+              <button class="btn-accept">✓ Accept</button>
+              <button class="btn-reject">✗ Reject</button>
+            </div>
+          </li>
+          <li class="diff-file">
+            <span class="diff-status accepted"></span>
+            frontend/src/App.jsx
+            <span class="diff-add" style="margin-left:auto;">+8</span>
+            <span class="diff-del">-2</span>
+            <div class="diff-actions">
+              <span style="font-size:11px;color:var(--green);font-weight:600;">Accepted ✓</span>
+            </div>
+          </li>
+          <li class="diff-file">
+            <span class="diff-status rejected"></span>
+            backend/routes/auth.js
+            <span class="diff-add" style="margin-left:auto;">+31</span>
+            <span class="diff-del">-0</span>
+            <div class="diff-actions">
+              <span style="font-size:11px;color:var(--red);font-weight:600;">Rejected ✗</span>
+            </div>
+          </li>
+        </ul>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-accept" style="flex:1;padding:7px;">✓ Accept All</button>
+          <button class="btn-reject" style="flex:1;padding:7px;">✗ Reject All</button>
+        </div>
+      </div>
+
+      <!-- FP4 — HEALTH CHECK -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            ❤️ Health Check <span class="fp-tag">FP4</span>
+          </div>
+          <span class="chip amber">DEGRADED</span>
+        </div>
+        <div class="health-ring-wrap">
+          <svg width="80" height="80" class="gauge-ring">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#f59e0b" stroke-width="8"
+              stroke-dasharray="143 214" stroke-linecap="round"
+              transform="rotate(-90 40 40)" style="transition:all 1s ease"/>
+            <text x="40" y="45" text-anchor="middle" font-family="Inter" font-size="18" font-weight="700" fill="#f59e0b">67%</text>
+          </svg>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">YourJam Workspace</div>
+            <div style="font-size:12px;color:var(--text-2);">Fix warnings before running long agent sessions</div>
+            <button class="btn-primary" style="margin-top:10px;font-size:11px;">↻ Re-run Check</button>
+          </div>
+        </div>
+        <div class="audit-row">
+          <span class="audit-icon">🔧</span>
+          <div class="audit-label">Git initialized<div class="audit-desc">Repository is tracked</div></div>
+          <span class="audit-result pass">PASS</span>
+        </div>
+        <div class="audit-row">
+          <span class="audit-icon">📦</span>
+          <div class="audit-label">node_modules<div class="audit-desc">No root package.json (monorepo)</div></div>
+          <span class="audit-result fail">FAIL</span>
+        </div>
+        <div class="audit-row">
+          <span class="audit-icon">🔒</span>
+          <div class="audit-label">Vulnerability scan<div class="audit-desc">npm audit — no critical CVEs</div></div>
+          <span class="audit-result pass">PASS</span>
+        </div>
+        <div class="audit-row">
+          <span class="audit-icon">⚙️</span>
+          <div class="audit-label">.env variables<div class="audit-desc">No .env file (no .env.example found)</div></div>
+          <span class="audit-result pass">PASS</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="grid-2">
+
+      <!-- FP5 — PARCEL MEMORY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            🧠 Parcel Memory <span class="fp-tag">FP5</span>
+          </div>
+          <span style="font-size:11px;color:var(--green);font-weight:600;">TrueMemory · SQLite</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">📌</span>
+          <span class="rule-text">Always use arrow functions — never function declarations</span>
+          <span class="rule-remove">✕</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">📌</span>
+          <span class="rule-text">Use HSL color system — no plain hex or Tailwind colors</span>
+          <span class="rule-remove">✕</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">📌</span>
+          <span class="rule-text">Always use the custom Toast component — never native alert()</span>
+          <span class="rule-remove">✕</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">📌</span>
+          <span class="rule-text">YourJam is a monorepo — frontend/ and backend/ are separate workspaces</span>
+          <span class="rule-remove">✕</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn-ghost" style="flex:1;justify-content:center;">+ Add Rule</button>
+          <button class="btn-primary" style="flex:1;">📋 Copy Recall Prompt</button>
+        </div>
+      </div>
+
+      <!-- FP COVERAGE OVERVIEW -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🛡️ Coverage — All 5 FPs Resolved</div>
+        </div>
+        <ul class="coverage-list">
+          <li class="coverage-item">
+            <div class="cov-icon">✓</div>
+            <div><div class="cov-title">No Rollback UI</div><div class="cov-fix">Checkpoint timeline + one-click restore</div></div>
+            <span class="cov-fp">FP1</span>
+          </li>
+          <li class="coverage-item">
+            <div class="cov-icon">✓</div>
+            <div><div class="cov-title">Memory Desync</div><div class="cov-fix">Manual-edit watcher + sync prompts</div></div>
+            <span class="cov-fp">FP2</span>
+          </li>
+          <li class="coverage-item">
+            <div class="cov-icon">✓</div>
+            <div><div class="cov-title">Forced Commits</div><div class="cov-fix">Per-file accept / reject staging</div></div>
+            <span class="cov-fp">FP3</span>
+          </li>
+          <li class="coverage-item">
+            <div class="cov-icon">✓</div>
+            <div><div class="cov-title">Blind Workspace Trust</div><div class="cov-fix">Pre-flight environment health audit</div></div>
+            <span class="cov-fp">FP4</span>
+          </li>
+          <li class="coverage-item">
+            <div class="cov-icon">✓</div>
+            <div><div class="cov-title">No Long-term Memory</div><div class="cov-fix">Persistent TrueMemory SQLite rules</div></div>
+            <span class="cov-fp">FP5</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER TOOLBAR -->
+<div class="toolbar">
+  <span class="status-dot"></span>
+  <span class="toolbar-label">AgentGuard v1.0.0 · Enter Pro safety layer · YourJam workspace · TrueMemory connected</span>
+  <button class="btn-ghost" style="margin-left:auto;">View Logs</button>
+  <button class="btn-primary">🤖 Brief Agent</button>
+</div>
+
+</body>
+</html>

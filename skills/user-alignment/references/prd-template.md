@@ -18,6 +18,19 @@ Copy this template into `docs/prds/[feature-name].md`. It is referenced from
 
 > [Paste the user’s exact request here]
 
+### 1.1 Session Replay & Telemetry Evidence
+
+- **User Session Replay Link:** `[Link to Produck session replay]`
+- **Console Log / Stack Trace:**
+  ```
+  [Paste raw console output or error traces here]
+  ```
+- **Relevant Network Payload:**
+  ```json
+  // [Paste request/response JSON here]
+  ```
+- **Screenshot / Artifact references:** `[Link to screenshot images]`
+
 ---
 
 ## 2. Aligned Understanding
@@ -157,6 +170,25 @@ Copy this template into `docs/prds/[feature-name].md`. It is referenced from
 - [PII/secrets handling]
 - [Auth/authorization constraints]
 - [Compliance requirements]
+
+### 7.5 Persistent Memory & Preference Sync
+
+The agent must read and respect rules specified in `.agentguard/parcel-memory.json` (if present) before generating code. 
+Example structure:
+```json
+{
+  "rules": [
+    "Always use arrow functions",
+    "No traditional function declarations"
+  ],
+  "sessionHistory": [
+    {
+      "timestamp": "2026-06-22T06:00:00Z",
+      "summary": "Completed health checks and diff views"
+    }
+  ]
+}
+```
 
 ---
 

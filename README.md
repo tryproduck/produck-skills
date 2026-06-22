@@ -2,7 +2,7 @@
 
 **High-quality, user-experience-centered skills for your coding agents.**
 
-This repo is our open-source, documentation-driven collection of [agent skills](https://code.claude.com/docs/en/skills) to help you build products users love.
+This repository is our open-source, documentation-driven collection of [agent skills](https://code.claude.com/docs/en/skills) to help you build products users love.
 Each skill is a folder of markdown that teaches a coding agent (Claude Code, Cursor, Codex, Copilot, and others) how to ship features and fixes that your users want to improve product-market fit — starting with turning messy user requests into context-rich PRDs your agents can actually execute.
 
 ![Star History Chart](https://api.star-history.com/svg?repos=tryproduck%2Fproduck-skills&type=timeline&legend=top-left)

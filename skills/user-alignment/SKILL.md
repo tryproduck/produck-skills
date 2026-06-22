@@ -176,7 +176,13 @@ The user wants [outcome] for [user/persona] because [problem]. The desired resul
 ## Unknowns
 - [Information needed before implementation]
 ```
+## Risks
+- Technical risks that could affect implementation
+- Data privacy or security concerns
+- Timeline or resource constraints
+- External dependencies that may block progress
 
+Identify high-risk items before implementation begins and surface them during alignment.
 A good agent should act on obvious defaults, but should not hallucinate material requirements. If an unknown changes architecture, cost, privacy, or scope, ask before execution.
 
 ### Step 4: Ask only high-leverage clarification questions

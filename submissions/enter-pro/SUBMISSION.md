@@ -11,8 +11,8 @@
 
 | Resource | Link |
 |----------|------|
-| 🎥 Demo Video | *(paste Loom link here after recording)* |
-| 💻 Working Codebase (VS Code Extension) | *(paste GitHub repo link here)* |
+| 🎥 Demo Video | [Watch on Google Drive](https://drive.google.com/file/d/1eDtXt9HHi5ztSz9OJiIKtuH4yFRrCKzC/view?usp=sharing) |
+| 💻 Working Codebase (VS Code Extension) | [github.com/paarth293/AgentGuard](https://github.com/paarth293/AgentGuard) |
 | 🖥️ High-Fidelity Mockup | [`mockup/index.html`](mockup/index.html) |
 | 📋 PRD | [`PRD.md`](PRD.md) |
 | 🦆 Produck Feedback | [`FEEDBACK.md`](FEEDBACK.md) |
@@ -83,6 +83,6 @@ A VS Code extension with 5 safety features, each solving one captured friction p
 | GitHub Repository (fork with clear README + 2 PRs) | ✅ | `github.com/paarth293/produck-skills` |
 | PR 1: Skill improvements | ✅ | Skills improved on `main` branch |
 | PR 2: Mockup + PRD + Feedback | ✅ | This PR (`pr2/enter-pro-mockup`) |
-| Demo Video (2-min walkthrough) | 🔲 | *(link to be added)* |
+| Demo Video (2-min walkthrough) | ✅ | [Watch on Google Drive](https://drive.google.com/file/d/1eDtXt9HHi5ztSz9OJiIKtuH4yFRrCKzC/view?usp=sharing) |
 | Live Mockup | ✅ | `submissions/enter-pro/mockup/index.html` |
 | Tool Integration documentation | ✅ | This file (`SUBMISSION.md`) |
